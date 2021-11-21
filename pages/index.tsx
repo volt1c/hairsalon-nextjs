@@ -1,7 +1,8 @@
-import styles from "../styles/Home.module.css";
-import Link from "next/link";
+import { NextPage } from 'next'
+import Link from 'next/link'
+import styles from '@styles/Home.module.css'
 
-export default function Home() {
+const IndexPage: NextPage = () => {
   return (
     <div className={styles.main}>
       <h1 className={styles.banner}>The best hair salon in the city</h1>
@@ -10,5 +11,7 @@ export default function Home() {
         <a className={styles.buttonLink}>Book now</a>
       </Link>
     </div>
-  );
+  )
 }
+
+export default IndexPage

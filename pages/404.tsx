@@ -1,8 +1,9 @@
-import Head from "next/head";
-import InfoBox from "../components/InfoBox";
-import styles from "../styles/404.module.css";
+import Head from 'next/head'
+import InfoBox from '@components/InfoBox'
+import styles from '@styles/404.module.css'
+import { NextPage } from 'next'
 
-export default function Home() {
+const _404Page: NextPage = () => {
   return (
     <InfoBox>
       <Head>
@@ -16,5 +17,7 @@ export default function Home() {
         <h6>STATUS: 404</h6>
       </div>
     </InfoBox>
-  );
+  )
 }
+
+export default _404Page
