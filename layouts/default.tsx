@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import styles from '@styles/components/Layout.module.css'
-import Navbar from './Navbar'
-import Footer from './Footer'
+import Navbar from '@components/Navbar'
+import Footer from '@components/Footer'
 import { ReactElement } from 'react'
 
 type LayoutProps = {
