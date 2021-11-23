@@ -1,8 +1,8 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import _ from 'lodash'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import dbConnect from '@database/dbConnect'
+import _ from 'lodash'
 import { IVisit, Visit, VisitKeys } from '@database/models/visit'
+import dbConnect from '@database/dbConnect'
 
 dbConnect()
 type Data = IVisit
