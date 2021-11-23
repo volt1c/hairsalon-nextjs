@@ -22,6 +22,7 @@
       "@styles/*": ["./styles/*"],
       "@public/*": ["./public/*"],
       "@utils/*": ["./utils/*"],
+      "@database/*": ["./database/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
