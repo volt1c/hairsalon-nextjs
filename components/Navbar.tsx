@@ -1,32 +1,35 @@
-import styles from '@styles/components/Navbar.module.css'
+import { Button } from '@vechaiui/react'
 import Link from 'next/link'
 import { ReactElement } from 'react'
 
 const Navbar = (): ReactElement => (
-  <header className={styles.self}>
-    <h1 className={styles.logo}>
-      <Link href="/">
-        <a>HairSalon</a>
-      </Link>
-    </h1>
-    <nav className={styles.nav}>
+  <header className="bg-black">
+    <nav className="justify-between flex items-center px-5">
+      <h1 className="py-5 text-2xl uppercase">
+        <Link href="/">
+          <a>HairSalon</a>
+        </Link>
+      </h1>
       <ul>
-        <li>
+        <li className="inline-block px-5">
           <Link href="/about">
-            <a>About</a>
+            <Button variant="ghost">About</Button>
           </Link>
         </li>
-        <li>
+        <li className="inline-block px-5">
           <Link href="/contact">
-            <a>Contact</a>
+            <Button variant="ghost">Contact</Button>
           </Link>
         </li>
-        <li>
+        <li className="inline-block px-5">
           <Link href="/book">
-            <a>Book</a>
+            <Button variant="ghost">Book</Button>
           </Link>
         </li>
       </ul>
+      <Button variant="light" color="primary" className="uppercase">
+        book an appointment
+      </Button>
     </nav>
   </header>
 )
