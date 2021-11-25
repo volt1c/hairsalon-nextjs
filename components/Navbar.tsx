@@ -27,9 +27,11 @@ const Navbar = (): ReactElement => (
           </Link>
         </li>
       </ul>
-      <Button variant="light" color="primary" className="uppercase">
-        book an appointment
-      </Button>
+      <Link href="/about">
+        <Button variant="light" color="primary" className="uppercase">
+          book an appointment
+        </Button>
+      </Link>
     </nav>
   </header>
 )
