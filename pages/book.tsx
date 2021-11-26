@@ -10,24 +10,25 @@ const Book: NextPage = () => {
     <Layout>
       <Head>
         <meta charSet="utf-8" />
+        <title>Hairsalon - Book an appointment</title>
       </Head>
 
       <InfoBox>
         <div className="flex flex-wrap w-full p-5">
           <h1 className="p-4 text-3xl">Book an appointment</h1>
           <FormControl id="name" className="p-4">
-            <Input placeholder="Name" />
+            <Input placeholder="Name" variant="solid" />
           </FormControl>
           <FormControl id="surename" className="p-4">
-            <Input placeholder="Surename" />
+            <Input placeholder="Surename" variant="solid" />
           </FormControl>
           <FormControl id="email" className="p-4">
-            <Input placeholder="Email" />
+            <Input placeholder="Email" variant="solid" />
           </FormControl>
           <FormControl id="phone" className="p-4">
             <Input.Group>
               <Input.LeftAddon children="+xxx" />
-              <Input placeholder="Phone Number" />
+              <Input placeholder="Phone Number" variant="solid" />
             </Input.Group>
           </FormControl>
           <FormControl id="date" className="p-4">
@@ -49,7 +50,7 @@ const Book: NextPage = () => {
                   </svg>
                 }
               />
-              <Input placeholder="Date" type="date" />
+              <Input placeholder="Date" type="datetime-local" variant="solid" />
             </Input.Group>
           </FormControl>
         </div>
