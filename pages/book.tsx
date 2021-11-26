@@ -1,28 +1,61 @@
+import Layout from '@layouts/default'
+import InfoBox from '@components/InfoBox'
+import React from 'react'
 import { NextPage } from 'next'
 import Head from 'next/head'
-import { VechaiProvider, Button } from '@vechaiui/react'
-import Layout from '@layouts/default'
+import { FormControl, Input } from '@vechaiui/react'
 
-const About: NextPage = () => {
+const Book: NextPage = () => {
   return (
     <Layout>
-      <div className="flex flex-wrap w-full p-8 space-x-2">
-        <Button color="primary">Button</Button>
-        <Button variant="solid" color="primary">
-          Button
-        </Button>
-        <Button variant="light" color="primary">
-          Button
-        </Button>
-        <Button variant="ghost" color="primary">
-          Button
-        </Button>
-        <Button variant="link" color="primary">
-          Button
-        </Button>
-      </div>
+      <Head>
+        <meta charSet="utf-8" />
+      </Head>
+
+      <InfoBox>
+        <div className="flex flex-wrap w-full p-5">
+          <h1 className="p-4 text-3xl">Book an appointment</h1>
+          <FormControl id="name" className="p-4">
+            <Input placeholder="Name" />
+          </FormControl>
+          <FormControl id="surename" className="p-4">
+            <Input placeholder="Surename" />
+          </FormControl>
+          <FormControl id="email" className="p-4">
+            <Input placeholder="Email" />
+          </FormControl>
+          <FormControl id="phone" className="p-4">
+            <Input.Group>
+              <Input.LeftAddon children="+xxx" />
+              <Input placeholder="Phone Number" />
+            </Input.Group>
+          </FormControl>
+          <FormControl id="date" className="p-4">
+            <Input.Group>
+              <Input.RightElement
+                children={
+                  <svg
+                    className="h-6 w-6 text-gray-400"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                    ></path>
+                  </svg>
+                }
+              />
+              <Input placeholder="Date" type="date" />
+            </Input.Group>
+          </FormControl>
+        </div>
+      </InfoBox>
     </Layout>
   )
 }
 
-export default About
+export default Book
