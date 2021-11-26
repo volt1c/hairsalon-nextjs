@@ -1,6 +1,5 @@
 import { NextPage } from 'next'
 import Link from 'next/link'
-import styles from '@styles/Home.module.css'
 import Layout from '@layouts/default'
 import { Button } from '@vechaiui/react'
 
