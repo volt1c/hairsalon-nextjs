@@ -24,7 +24,15 @@ export default async function handler(
   }
 
   if (method == 'POST') {
-    await Visit.create(body)
+    // todo: validate body
+    const newVisit: IVisit = {
+      name: body.name,
+      surename: body.surename,
+      email: body.email,
+      phone: body.phone,
+      date: new Date(`${body.date} ${body.time}`),
+    } as IVisit
+    await Visit.create(newVisit)
     return res.status(201).end()
   }
 
