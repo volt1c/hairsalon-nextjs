@@ -2,10 +2,13 @@ import { ReactElement } from 'react'
 
 type InfoBoxProps = {
   children: ReactElement | ReactElement[]
+  className?: string | undefined
 }
 
-const InfoBox = ({ children }: InfoBoxProps): ReactElement => (
-  <div className="m-8 p-3 bg-base border-t-4 border-primary-400 rounded-md">
+const InfoBox = ({ children, className = '' }: InfoBoxProps): ReactElement => (
+  <div
+    className={`${className}  bg-base border-t-4 border-primary-400 rounded-md`}
+  >
     {children}
   </div>
 )
