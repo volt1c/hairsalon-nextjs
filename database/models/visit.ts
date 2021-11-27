@@ -6,7 +6,7 @@ const visitShema = new Schema({
   surename: { type: String, required: true },
   email: { type: String, required: true },
   phone: { type: String, required: true },
-  date: { type: String, required: true },
+  date: { type: Date, required: true },
 })
 
 interface IVisit extends Document {
@@ -15,7 +15,7 @@ interface IVisit extends Document {
   surename: string
   email: string
   phone: string
-  date: string
+  date: Date
 }
 interface ICreateVisit {
   name: IVisit['name']
