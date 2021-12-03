@@ -4,6 +4,9 @@ import { NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
 import { FormControl, Input, Button, useNotification } from '@vechaiui/react'
+import React from 'react'
+import { AiOutlineCalendar } from 'react-icons/ai'
+import { BiTime } from 'react-icons/bi'
 
 const Book: NextPage = () => {
   const notification = useNotification()
@@ -67,21 +70,7 @@ const Book: NextPage = () => {
               <FormControl id="date" className="pb-6 pr-3">
                 <Input.Group>
                   <Input.RightElement
-                    children={
-                      <svg
-                        className="h-6 w-6 text-gray-400"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                        ></path>
-                      </svg>
-                    }
+                    children={<AiOutlineCalendar className="h-6 w-6" />}
                   />
                   <Input placeholder="Date" type="date" variant="solid" />
                 </Input.Group>
@@ -89,18 +78,7 @@ const Book: NextPage = () => {
               <FormControl id="time" className="pb-6">
                 <Input.Group>
                   <Input.RightElement
-                    children={
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="currentColor"
-                        viewBox="0 0 16 16"
-                        strokeWidth="2"
-                        className="h-6 w-6 text-gray-400 m-1"
-                      >
-                        <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"></path>
-                        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"></path>
-                      </svg>
-                    }
+                    children={<BiTime className="h-6 w-6" />}
                   />
 
                   <Input placeholder="Time" type="time" variant="solid" />
