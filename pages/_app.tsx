@@ -14,7 +14,7 @@ const dark: ColorScheme = {
   colors: {
     bg: {
       base: colors.coolGray['900'],
-      fill: colors.coolGray['900'],
+      fill: colors.coolGray['800'],
     },
     text: {
       foreground: colors.coolGray['100'],
