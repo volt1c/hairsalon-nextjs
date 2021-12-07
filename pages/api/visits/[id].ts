@@ -14,14 +14,21 @@ export default async function handler(
     method,
   } = req
 
-  if (method == 'GET') {
-    const visit: IVisit = _.pick(
-      await Visit.findOne({ _id: id }).exec(),
-      VisitKeys
-    ) as IVisit
-    res.status(200).json(visit)
+  switch (method) {
+    case 'GET':
+      const visit: IVisit = _.pick(
+        await Visit.findOne({ _id: id }).exec(),
+        VisitKeys
+      ) as IVisit
+      res.status(200).json(visit)
+      return
+
+    case 'DELETE':
+      await Visit.deleteOne({ _id: id }).exec()
+      res.status(202).end()
+      return
   }
 
-  res.setHeader('Allow', ['GET', 'POST', 'DELETE'])
+  res.setHeader('Allow', ['GET', 'DELETE'])
   res.status(405).end(`Method ${method} Not Allowed`)
 }
