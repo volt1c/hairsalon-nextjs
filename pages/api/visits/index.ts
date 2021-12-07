@@ -1,12 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { IVisit, Visit, VisitKeys } from '@database/models/visit'
+import { ICreateVisit, IVisit, Visit, VisitKeys } from '@database/models/visit'
 import dbConnect from '@database/dbConnect'
 import _ from 'lodash'
+import { addVisit } from './addVisit'
 
 dbConnect()
-type Data = {
-  plannedVisits: IVisit[]
-}
+type Data = any
 
 export default async function handler(
   req: NextApiRequest,
@@ -16,7 +15,7 @@ export default async function handler(
 
   switch (method) {
     case 'GET':
-      const rawVisits: (IVisit & object)[] = await Visit.find({}).exec()
+      const rawVisits: IVisit[] = await Visit.find({}).exec()
       const visits: IVisit[] = rawVisits.map((visit) =>
         _.pick(visit, VisitKeys)
       ) as IVisit[]
@@ -24,16 +23,21 @@ export default async function handler(
       return
 
     case 'POST':
-      // todo: validate body
-      const newVisit: IVisit = {
-        name: body.name,
-        surename: body.surename,
-        email: body.email,
-        phone: body.phone,
-        date: new Date(`${body.date} ${body.time}`),
-      } as IVisit
-      await Visit.create(newVisit)
-      res.status(201).end()
+      let code = 406
+      if (
+        typeof body.name == 'string' &&
+        typeof body.surename == 'string' &&
+        typeof body.email == 'string' &&
+        typeof body.phone == 'string' &&
+        typeof body.year == 'number' &&
+        typeof body.month == 'number' &&
+        typeof body.day == 'number' &&
+        typeof body.hour == 'number'
+      ) {
+        const visit = body as ICreateVisit
+        code = (await addVisit(visit)) ? 201 : 406
+      }
+      res.status(code).end()
       return
 
     case 'DELETE':
