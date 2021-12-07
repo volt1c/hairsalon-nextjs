@@ -1,18 +1,20 @@
 import Layout from '@layouts/default'
 import InfoBox from '@components/InfoBox'
-import { NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
 import { FormControl, Input, Button, useNotification } from '@vechaiui/react'
 import React from 'react'
-import { AiOutlineCalendar } from 'react-icons/ai'
-import { BiTime } from 'react-icons/bi'
+import SelectDate from '@components/SelectDate'
 
-const Book: NextPage = () => {
-  const notification = useNotification()
-
+function Book({
+  avaliable,
+  schedule,
+}: {
+  avaliable: string[]
+  schedule: object
+}) {
   const handleMessage = (ok: boolean) =>
-    notification({
+    useNotification()({
       title: ok ? 'Success...' : 'Error...',
       description: `Apppointment ${
         ok ? ' was successfully booked' : "couldn't be booked"
@@ -28,7 +30,6 @@ const Book: NextPage = () => {
     ;['name', 'surename', 'email', 'phone', 'date', 'time'].forEach(
       (name) => (formData[name] = getValue(name))
     )
-    console.log(formData)
 
     const res = await fetch('./api/visits', {
       method: 'POST',
@@ -40,6 +41,7 @@ const Book: NextPage = () => {
 
     handleMessage(res.ok)
   }
+
   return (
     <Layout>
       <Head>
@@ -67,23 +69,7 @@ const Book: NextPage = () => {
               </Input.Group>
             </FormControl>
             <div className="flex flex-row">
-              <FormControl id="date" className="pb-6 pr-3">
-                <Input.Group>
-                  <Input.RightElement
-                    children={<AiOutlineCalendar className="h-6 w-6" />}
-                  />
-                  <Input placeholder="Date" type="date" variant="solid" />
-                </Input.Group>
-              </FormControl>
-              <FormControl id="time" className="pb-6">
-                <Input.Group>
-                  <Input.RightElement
-                    children={<BiTime className="h-6 w-6" />}
-                  />
-
-                  <Input placeholder="Time" type="time" variant="solid" />
-                </Input.Group>
-              </FormControl>
+              <SelectDate dates={avaliable} />
             </div>
             <Button type="button" className="mr-3" onClick={formSubmit}>
               Send
@@ -98,6 +84,19 @@ const Book: NextPage = () => {
       </InfoBox>
     </Layout>
   )
+}
+
+export async function getStaticProps() {
+  const baseUrl = process.env.URL as string
+
+  const data = await (await fetch(`${baseUrl}/api/visits/avaliable`)).json()
+  const avaliable: string[] = data.avaliable
+
+  return {
+    props: {
+      avaliable,
+    },
+  }
 }
 
 export default Book
