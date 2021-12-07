@@ -1,5 +1,31 @@
 import { Schema, Document, model, models } from 'mongoose'
 
+type time =
+  | 0
+  | 1
+  | 2
+  | 3
+  | 4
+  | 5
+  | 6
+  | 7
+  | 8
+  | 9
+  | 10
+  | 11
+  | 12
+  | 13
+  | 14
+  | 15
+  | 16
+  | 17
+  | 18
+  | 19
+  | 20
+  | 21
+  | 22
+  | 23
+
 const VisitKeys = ['_id', 'name', 'surename', 'email', 'phone', 'date']
 const visitShema = new Schema({
   name: { type: String, required: true },
@@ -22,7 +48,10 @@ interface ICreateVisit {
   surename: IVisit['surename']
   email: IVisit['email']
   phone: IVisit['phone']
-  date: IVisit['date']
+  year: number
+  month: number
+  day: number
+  hour: number
 }
 const Visit = models.Visit || model<IVisit>('Visit', visitShema)
 
