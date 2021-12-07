@@ -1,10 +1,15 @@
 import AdminPanelLayout from '@layouts/AdminPanelLayout'
 import { NextPage } from 'next'
+import Head from 'next/head'
 import React from 'react'
 
 const IndexPage: NextPage = () => (
   <AdminPanelLayout>
-    <h1>test</h1>
+    <Head>
+      <title>Admin Panel</title>
+    </Head>
+
+    <h1>Hello World</h1>
   </AdminPanelLayout>
 )
 
