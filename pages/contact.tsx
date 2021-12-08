@@ -15,7 +15,7 @@ import { AiOutlineMail, AiOutlinePhone } from 'react-icons/ai'
 const ContactPage: NextPage = () => {
   return (
     <Layout>
-      <InfoBox className="p-0 border-primary-400 flex flex-row flex-initial mx-24 my-12">
+      <InfoBox className="p-0 border-primary-400 flex flex-row flex-initial mx-24 my-auto">
         <div className=" flex-grow-0 bg-neutral-300 bg-opacity-20 p-5">
           <div className="mb-3">
             <h1 className="text-2xl pb-4">Contact Information</h1>
