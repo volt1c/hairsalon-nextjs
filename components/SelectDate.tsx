@@ -83,16 +83,18 @@ const SelectDate = ({ dates }: Props): ReactElement => {
 
   return (
     <FormControl className="flex flex-row gap-2 pb-6">
-      <Select placeholder="Year" onChange={loadMonths}>
+      <Select id="year" placeholder="Year" onChange={loadMonths}>
         {yearOptions}
       </Select>
-      <Select placeholder="Month" onChange={loadDates}>
+      <Select id="month" placeholder="Month" onChange={loadDates}>
         {monthOptions}
       </Select>
-      <Select placeholder="Day" onChange={loadHours}>
+      <Select id="day" placeholder="Day" onChange={loadHours}>
         {dateOptions}
       </Select>
-      <Select placeholder="Hour">{hourOptions}</Select>
+      <Select id="hour" placeholder="Hour">
+        {hourOptions}
+      </Select>
     </FormControl>
   )
 }

@@ -13,8 +13,9 @@ function Book({
   avaliable: string[]
   schedule: object
 }) {
+  const notification = useNotification()
   const handleMessage = (ok: boolean) =>
-    useNotification()({
+    notification({
       title: ok ? 'Success...' : 'Error...',
       description: `Apppointment ${
         ok ? ' was successfully booked' : "couldn't be booked"
@@ -23,12 +24,30 @@ function Book({
       position: 'top',
     })
   const formSubmit = async () => {
-    const getValue = (id: string): string =>
-      (document.querySelector(`#${id}`) as any).value as string
+    const getValue = (
+      id: string,
+      isNumber: boolean = false
+    ): string | number => {
+      const value = (document.querySelector(`#${id}`) as any).value as string
+      return isNumber ? parseInt(value) : value
+    }
 
     const formData: { [key: string]: any } = {}
-    ;['name', 'surename', 'email', 'phone', 'date', 'time'].forEach(
-      (name) => (formData[name] = getValue(name))
+    ;[
+      ['name'],
+      ['surename'],
+      ['email'],
+      ['phone'],
+      ['year', true],
+      ['month', true],
+      ['day', true],
+      ['hour', true],
+    ].forEach(
+      ([name, isNumber = false]) =>
+        (formData[name as string] = getValue(
+          name as string,
+          isNumber as boolean
+        ))
     )
 
     const res = await fetch('./api/visits', {
@@ -38,7 +57,8 @@ function Book({
         'Content-Type': 'application/json',
       },
     })
-
+    console.log(JSON.stringify(formData))
+    console.log(res)
     handleMessage(res.ok)
   }
 
