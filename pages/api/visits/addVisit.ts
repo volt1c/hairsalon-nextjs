@@ -9,5 +9,6 @@ export async function addVisit(visit: ICreateVisit): Promise<boolean> {
     phone: visit.phone,
     date: new Date(visit.year, visit.month - 1, visit.day, visit.hour),
   } as IVisit
+  Visit.create(newVisit)
   return true
 }
