@@ -6,6 +6,8 @@ import { FormControl, Input, Button, useNotification } from '@vechaiui/react'
 import React from 'react'
 import SelectDate from '@components/SelectDate'
 import { ISchedule } from '@database/models/schedule'
+import { NextPageContext } from 'next'
+import getOriginUrl from '@utils/getOriginUrl'
 
 function Book({
   avaliable,
@@ -134,8 +136,10 @@ function Book({
   )
 }
 
-export async function getStaticProps() {
-  const baseUrl = process.env.URL as string
+Book.getInitialProps = async ({ req }: NextPageContext) => {
+  if (!req) throw new Error('error - ctx.req is not defined')
+
+  let baseUrl: string = getOriginUrl(req)
 
   let avaliable: string[] = []
   let schedule = {
@@ -158,10 +162,8 @@ export async function getStaticProps() {
   } catch (err) {}
 
   return {
-    props: {
-      avaliable,
-      schedule,
-    },
+    avaliable,
+    schedule,
   }
 }
 
