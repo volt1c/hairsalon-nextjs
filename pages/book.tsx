@@ -137,8 +137,6 @@ function Book({
 }
 
 Book.getInitialProps = async ({ req }: NextPageContext) => {
-  if (!req) throw new Error('error - ctx.req is not defined')
-
   let baseUrl: string = getOriginUrl(req)
 
   let avaliable: string[] = []

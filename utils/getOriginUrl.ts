@@ -1,6 +1,6 @@
 import { IncomingMessage } from 'http'
 
-function getOriginUrl(req: IncomingMessage) {
+function getOriginUrl(req: IncomingMessage | undefined) {
   let baseUrl: string
   if (req) {
     // Server side rendering
