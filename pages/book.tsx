@@ -137,13 +137,25 @@ function Book({
 export async function getStaticProps() {
   const baseUrl = process.env.URL as string
 
-  const dataAvaliable = await (
-    await fetch(`${baseUrl}/api/visits/avaliable`)
-  ).json()
-  const avaliable: string[] = dataAvaliable.avaliable
+  let avaliable: string[] = []
+  let schedule = {
+    _id: 'test',
+    planningScope: 0,
+    workWeekDays: [],
+    openHours: [],
+  }
 
-  const dataSchedule = await (await fetch(`${baseUrl}/api/schedule`)).json()
-  const schedule: ISchedule = dataSchedule
+  try {
+    const dataAvaliable = await (
+      await fetch(`${baseUrl}/api/visits/avaliable`)
+    ).json()
+    avaliable = dataAvaliable.avaliable
+  } catch (err) {}
+
+  try {
+    const dataSchedule = await (await fetch(`${baseUrl}/api/schedule`)).json()
+    schedule = dataSchedule
+  } catch (err) {}
 
   return {
     props: {
