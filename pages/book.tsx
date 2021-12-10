@@ -5,13 +5,14 @@ import Link from 'next/link'
 import { FormControl, Input, Button, useNotification } from '@vechaiui/react'
 import React from 'react'
 import SelectDate from '@components/SelectDate'
+import { ISchedule } from '@database/models/schedule'
 
 function Book({
   avaliable,
   schedule,
 }: {
   avaliable: string[]
-  schedule: object
+  schedule: ISchedule
 }) {
   const notification = useNotification()
   const handleMessage = (ok: boolean) =>
@@ -69,7 +70,34 @@ function Book({
         <title>Hairsalon - Book an appointment</title>
       </Head>
 
-      <InfoBox>
+      <InfoBox className="flex flex-row flex-initial">
+        <div className=" flex-grow-0 bg-neutral-300 bg-opacity-20 p-5">
+          <div className="mb-3">
+            <h1 className="text-2xl pb-4">Schedule: </h1>
+
+            <h2 className="text-lg pb-4">When we are open:</h2>
+            <p>Work days:</p>
+            <ul>
+              {schedule.workWeekDays.map((day) => (
+                <li key={day.toString()} className="ml-2">{`${day}`}</li>
+              ))}
+            </ul>
+            <p>Open hours:</p>
+            <ul>
+              {schedule.openHours.map((hour) => (
+                <li key={hour.toString()} className="ml-2">{`${hour}:00`}</li>
+              ))}
+            </ul>
+            <p>Planning scope:</p>
+            <ul>
+              <li key={schedule.planningScope.toString()} className="ml-2">
+                {schedule.planningScope} days
+              </li>
+            </ul>
+          </div>
+          <ul></ul>
+        </div>
+
         <div className="flex flex-wrap flex-col w-full p-5">
           <h1 className="p-4 text-3xl ">Book an appointment</h1>
           <form className="block p-4">
@@ -109,12 +137,18 @@ function Book({
 export async function getStaticProps() {
   const baseUrl = process.env.URL as string
 
-  const data = await (await fetch(`${baseUrl}/api/visits/avaliable`)).json()
-  const avaliable: string[] = data.avaliable
+  const dataAvaliable = await (
+    await fetch(`${baseUrl}/api/visits/avaliable`)
+  ).json()
+  const avaliable: string[] = dataAvaliable.avaliable
+
+  const dataSchedule = await (await fetch(`${baseUrl}/api/schedule`)).json()
+  const schedule: ISchedule = dataSchedule
 
   return {
     props: {
       avaliable,
+      schedule,
     },
   }
 }
