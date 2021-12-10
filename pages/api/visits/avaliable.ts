@@ -18,8 +18,7 @@ export default async function handler(
       const rawVisits: IVisit[] = await Visit.find({}).exec()
       const unavaliable: Date[] = rawVisits.map((visit) => visit.date)
       const avaliable: Date[] = await getAvaliableDates(
-        //todo get actuall date
-        new Date(2021, 11, 5, 14),
+        new Date(Date.now()),
         unavaliable.map((date) => date.valueOf())
       )
       res.status(200).json({ avaliable: avaliable })
