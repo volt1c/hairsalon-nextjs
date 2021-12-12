@@ -40,6 +40,25 @@ export default async function handler(
         res.status(401).end()
         return
       }
+
+    case 'PUT':
+      if (session?.user?.email == process.env.AUTHORIZED_EMAIL) {
+        await Visit.replaceOne(
+          { _id: id },
+          {
+            name: body.name,
+            surename: body.surename,
+            email: body.email,
+            phone: body.phone,
+            date: new Date(body.year, body.month - 1, body.day, body.hour),
+          }
+        ).exec()
+        res.status(202).end()
+        return
+      } else {
+        res.status(401).end()
+        return
+      }
   }
 
   res.setHeader('Allow', ['GET', 'DELETE', 'PUT'])
