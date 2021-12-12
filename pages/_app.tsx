@@ -1,5 +1,6 @@
 import '@styles/globals.scss'
 
+import { SessionProvider } from 'next-auth/react'
 import type { AppProps } from 'next/app'
 import {
   extendTheme,
@@ -49,11 +50,13 @@ const theme = extendTheme({
   },
 })
 
-function App({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
-    <VechaiProvider theme={theme} colorScheme="dark">
-      <Component {...pageProps} />
-    </VechaiProvider>
+    <SessionProvider session={session}>
+      <VechaiProvider theme={theme} colorScheme="dark">
+        <Component {...pageProps} />
+      </VechaiProvider>
+    </SessionProvider>
   )
 }
 
