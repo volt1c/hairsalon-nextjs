@@ -12,8 +12,6 @@ type Props = {
 }
 
 const AddVisitPage: NextPage<Props, any> = ({ visits }) => {
-  console.log(visits)
-
   return (
     <AdminPanelLayout pageName="visit:list">
       <h1 className="pl-4 py-2 text-2xl">List</h1>
