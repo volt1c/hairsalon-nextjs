@@ -4,7 +4,6 @@ import {
   AiOutlineDashboard,
   AiOutlineUnorderedList,
 } from 'react-icons/ai'
-import { BiAddToQueue } from 'react-icons/bi'
 import ListItem from '@components/admin-panel/Sidebar/ListItem'
 
 type Props = {

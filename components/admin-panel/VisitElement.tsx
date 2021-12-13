@@ -1,8 +1,7 @@
 import { IVisit } from '@database/models/visit'
 import { getDayName } from '@utils/dateNames'
 import fetchWithCookies from '@utils/fetchWithCookies'
-import { Alert, Button, Input, Link } from '@vechaiui/react'
-import { useRouter } from 'next/router'
+import { Button, Link } from '@vechaiui/react'
 import { ReactElement, useState } from 'react'
 
 type InfoBoxProps = {
