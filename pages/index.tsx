@@ -1,11 +1,11 @@
 import { NextPage } from 'next'
 import Link from 'next/link'
-import Layout from '@layouts/default'
+import MainLayout from '@layouts/MainLayout'
 import { Button } from '@vechaiui/react'
 
 const IndexPage: NextPage = () => {
   return (
-    <Layout>
+    <MainLayout>
       <div className="py-64 px-10">
         <h1 className="py-4 text-8xl uppercase">
           The best hair salon in the city
@@ -19,7 +19,7 @@ const IndexPage: NextPage = () => {
           </Button>
         </Link>
       </div>
-    </Layout>
+    </MainLayout>
   )
 }
 

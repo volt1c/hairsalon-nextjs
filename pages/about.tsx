@@ -1,5 +1,5 @@
 import { NextPage } from 'next'
-import Layout from '@layouts/default'
+import MainLayout from '@layouts/MainLayout'
 import InfoBox from '@components/InfoBox'
 import React from 'react'
 import { Tab } from '@headlessui/react'
@@ -25,7 +25,7 @@ const AboutPage: NextPage = () => {
   ]
 
   return (
-    <Layout>
+    <MainLayout>
       <InfoBox className="p-3">
         <Tab.Group as="div" className="flex flex-col" defaultIndex={0}>
           <Tab.List
@@ -63,7 +63,7 @@ const AboutPage: NextPage = () => {
           </Tab.Panels>
         </Tab.Group>
       </InfoBox>
-    </Layout>
+    </MainLayout>
   )
 }
 

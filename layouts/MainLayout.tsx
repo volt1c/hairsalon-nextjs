@@ -3,11 +3,11 @@ import Navbar from '@components/Navbar'
 import Footer from '@components/Footer'
 import { ReactElement } from 'react'
 
-type LayoutProps = {
+type Props = {
   children: ReactElement | ReactElement[]
 }
 
-const Layout = ({ children }: LayoutProps): ReactElement => (
+const MainLayout = ({ children }: Props): ReactElement => (
   <div className="min-h-screen h-full bg-gradient-to-r from-blue-800 via-green-700 to-indigo-600">
     <Head>
       <title>HairSalon</title>
@@ -21,4 +21,4 @@ const Layout = ({ children }: LayoutProps): ReactElement => (
   </div>
 )
 
-export default Layout
+export default MainLayout

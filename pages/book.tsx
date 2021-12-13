@@ -1,4 +1,4 @@
-import Layout from '@layouts/default'
+import MainLayout from '@layouts/MainLayout'
 import InfoBox from '@components/InfoBox'
 import Head from 'next/head'
 import React from 'react'
@@ -18,7 +18,7 @@ function Book({
   const notification = useNotification()
 
   return (
-    <Layout>
+    <MainLayout>
       <Head>
         <meta charSet="utf-8" />
         <title>Hairsalon - Book an appointment</title>
@@ -57,7 +57,7 @@ function Book({
           <FormAddVisit avaliable={avaliable} notification={notification} />
         </div>
       </InfoBox>
-    </Layout>
+    </MainLayout>
   )
 }
 

@@ -1,13 +1,13 @@
 import Head from 'next/head'
 import InfoBox from '@components/InfoBox'
 import { NextPage } from 'next'
-import Layout from '@layouts/default'
+import MainLayout from '@layouts/MainLayout'
 import { Disclosure } from '@headlessui/react'
 import { ChevronUpIcon, cx, Icon } from '@vechaiui/react'
 
 const _404Page: NextPage = () => {
   return (
-    <Layout>
+    <MainLayout>
       <InfoBox>
         <Head>
           <title>HairSalon - 404</title>
@@ -46,7 +46,7 @@ const _404Page: NextPage = () => {
           </Disclosure>
         </div>
       </InfoBox>
-    </Layout>
+    </MainLayout>
   )
 }
 

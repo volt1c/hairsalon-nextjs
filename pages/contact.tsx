@@ -1,5 +1,5 @@
 import { NextPage } from 'next'
-import Layout from '@layouts/default'
+import MainLayout from '@layouts/MainLayout'
 import InfoBox from '@components/InfoBox'
 import React from 'react'
 import {
@@ -14,7 +14,7 @@ import { AiOutlineMail, AiOutlinePhone } from 'react-icons/ai'
 
 const ContactPage: NextPage = () => {
   return (
-    <Layout>
+    <MainLayout>
       <InfoBox className="p-0 border-primary-400 flex flex-row flex-initial mx-24 my-auto">
         <div className=" flex-grow-0 bg-neutral-300 bg-opacity-20 p-5">
           <div className="mb-3">
@@ -69,7 +69,7 @@ const ContactPage: NextPage = () => {
           </form>
         </div>
       </InfoBox>
-    </Layout>
+    </MainLayout>
   )
 }
 
