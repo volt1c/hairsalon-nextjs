@@ -44,21 +44,21 @@ const Sidebar = ({ pageName }: Props): ReactElement => (
       </ul>
     </section>
     <section className="bg-blue-700 w-full h-full">
-      {/* <h5 className="px-3 p-1 font-thin">Workers</h5>
+      <h5 className="px-3 p-1 font-thin">Workers</h5>
       <ul className="w-full">
         <ListItem
           Icon={AiOutlineAppstoreAdd}
-          isChosen={pageName == 'index'}
-          href="/admin-panel/visit/add"
+          isChosen={pageName == 'worker:add'}
+          href="/admin-panel/worker/add"
           title="add"
         />
         <ListItem
           Icon={AiOutlineUnorderedList}
-          isChosen={pageName == 'add'}
-          href="/admin-panel/visit/list"
+          isChosen={pageName == 'worker:list'}
+          href="/admin-panel/worker/list"
           title="list"
         />
-      </ul> */}
+      </ul>
     </section>
   </aside>
 )
