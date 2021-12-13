@@ -35,7 +35,7 @@ export default async function handler(
     case 'DELETE':
       if (await hasPermission(session?.user)) {
         await Visit.deleteOne({ _id: id }).exec()
-        res.status(202).end()
+        res.status(200).end()
         return
       } else {
         res.status(401).end()
@@ -54,7 +54,7 @@ export default async function handler(
             date: new Date(body.year, body.month - 1, body.day, body.hour),
           }
         ).exec()
-        res.status(202).end()
+        res.status(200).end()
         return
       } else {
         res.status(401).end()

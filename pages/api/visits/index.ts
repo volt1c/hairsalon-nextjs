@@ -32,7 +32,7 @@ export default async function handler(
       }
 
     case 'POST':
-      let code = 406
+      let code = 422
       if (
         typeof body.name == 'string' &&
         typeof body.surename == 'string' &&
@@ -44,15 +44,15 @@ export default async function handler(
         typeof body.hour == 'number'
       ) {
         const visit = body as ICreateVisit
-        code = (await addVisit(visit)) ? 201 : 406
+        code = (await addVisit(visit)) ? 201 : 422
       }
       res.status(code).end()
       return
 
     case 'DELETE':
       if (await hasPermission(session?.user)) {
-        Visit.deleteMany({}).exec()
-        res.status(202).end()
+        await Visit.deleteMany({}).exec()
+        res.status(200).end()
         return
       } else {
         res.status(401).end()
