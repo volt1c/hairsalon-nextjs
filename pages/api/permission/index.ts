@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import dbConnect from '@database/dbConnect'
 import _ from 'lodash'
-import { Admin, IAdmin, ICreateAdmin } from '@database/models/admin'
+import { Admin } from '@database/models/admin'
 import { getSession } from 'next-auth/react'
 import hasPermission from '@utils/hasPermission'
 
