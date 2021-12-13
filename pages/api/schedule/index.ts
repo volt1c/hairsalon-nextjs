@@ -2,6 +2,8 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { ISchedule, Schedule, ScheduleKeys } from '@database/models/schedule'
 import dbConnect from '@database/dbConnect'
 import _ from 'lodash'
+import hasPermission from '@utils/hasPermission'
+import { getSession } from 'next-auth/react'
 
 dbConnect()
 type Data = any
@@ -10,6 +12,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
+  const session = await getSession()
   const { method, body } = req
 
   switch (method) {
@@ -20,17 +23,22 @@ export default async function handler(
       return
 
     case 'PUT':
-      // todo: validate body
-      const newSchedule: ISchedule = {
-        planningScope: body.planningScope,
-        workWeekDays: body.workWeekDays,
-        openHours: body.openHours,
-      } as ISchedule
-      if ((await Schedule.findOne({}).exec()) == null)
-        await Schedule.create(newSchedule)
-      await Schedule.findOneAndReplace({}, newSchedule)
-      res.status(201).end()
-      return
+      if (await hasPermission(session?.user)) {
+        // todo: validate body
+        const newSchedule: ISchedule = {
+          planningScope: body.planningScope,
+          workWeekDays: body.workWeekDays,
+          openHours: body.openHours,
+        } as ISchedule
+        if ((await Schedule.findOne({}).exec()) == null)
+          await Schedule.create(newSchedule)
+        await Schedule.findOneAndReplace({}, newSchedule)
+        res.status(201).end()
+        return
+      } else {
+        res.status(401).end()
+        return
+      }
 
     default:
       res.setHeader('Allow', ['GET', 'POST', 'DELETE'])
