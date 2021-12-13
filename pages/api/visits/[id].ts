@@ -3,6 +3,7 @@ import _ from 'lodash'
 import { IVisit, Visit, VisitKeys } from '@database/models/visit'
 import dbConnect from '@database/dbConnect'
 import { getSession } from 'next-auth/react'
+import hasPermission from '@utils/hasPermission'
 
 dbConnect()
 
@@ -19,7 +20,7 @@ export default async function handler(
 
   switch (method) {
     case 'GET':
-      if (session?.user?.email == process.env.AUTHORIZED_EMAIL) {
+      if (await hasPermission(session?.user)) {
         const visit: IVisit = _.pick(
           await Visit.findOne({ _id: id }).exec(),
           VisitKeys
@@ -32,7 +33,7 @@ export default async function handler(
       }
 
     case 'DELETE':
-      if (session?.user?.email == process.env.AUTHORIZED_EMAIL) {
+      if (await hasPermission(session?.user)) {
         await Visit.deleteOne({ _id: id }).exec()
         res.status(202).end()
         return
@@ -42,7 +43,7 @@ export default async function handler(
       }
 
     case 'PUT':
-      if (session?.user?.email == process.env.AUTHORIZED_EMAIL) {
+      if (await hasPermission(session?.user)) {
         await Visit.replaceOne(
           { _id: id },
           {

@@ -4,6 +4,7 @@ import dbConnect from '@database/dbConnect'
 import _ from 'lodash'
 import { addVisit } from './addVisit'
 import { getSession } from 'next-auth/react'
+import hasPermission from '@utils/hasPermission'
 
 dbConnect()
 type Data = any
@@ -17,7 +18,7 @@ export default async function handler(
 
   switch (method) {
     case 'GET':
-      if (session?.user?.email == process.env.AUTHORIZED_EMAIL) {
+      if (await hasPermission(session?.user)) {
         const rawVisits: IVisit[] = await Visit.find({}).exec()
         const visits: IVisit[] = rawVisits.map((visit) =>
           _.pick(visit, VisitKeys)
@@ -49,7 +50,7 @@ export default async function handler(
       return
 
     case 'DELETE':
-      if (session?.user?.email == process.env.AUTHORIZED_EMAIL) {
+      if (await hasPermission(session?.user)) {
         Visit.deleteMany({}).exec()
         res.status(202).end()
         return

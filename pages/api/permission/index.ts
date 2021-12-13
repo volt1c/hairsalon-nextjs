@@ -3,6 +3,7 @@ import dbConnect from '@database/dbConnect'
 import _ from 'lodash'
 import { Admin, IAdmin } from '@database/models/admin'
 import { getSession } from 'next-auth/react'
+import hasPermission from '@utils/hasPermission'
 
 dbConnect()
 type Data = any
@@ -16,10 +17,7 @@ export default async function handler(
 
   switch (method) {
     case 'HEAD':
-      const admin: IAdmin = await Admin.findOne({
-        email: session?.user?.email,
-      }).exec()
-      res.status(admin ? 200 : 401).end()
+      res.status((await hasPermission(session?.user)) ? 200 : 401).end()
       return
 
     default:
