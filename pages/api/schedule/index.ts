@@ -12,7 +12,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  const session = await getSession()
+  const session = await getSession({ req })
   const { method, body } = req
 
   switch (method) {
