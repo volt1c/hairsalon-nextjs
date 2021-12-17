@@ -1,19 +1,23 @@
-import { FormControl, Select } from '@vechaiui/forms'
+import { FormControl, RequiredIndicator, Select } from '@vechaiui/forms'
 import React, { ReactElement, useState } from 'react'
 import { getDayName, getMonthName } from '@utils/dateNames'
+import { FormLabel } from '@vechaiui/react'
 
 type Props = {
   dates: string[]
   defaultValue?: Date | undefined
+  isRequired?: boolean
 }
 
 let isRendered = false
+let date: Date
 
 const SelectDate = ({
   dates,
   defaultValue = undefined,
+  isRequired = false,
 }: Props): ReactElement => {
-  const date: Date = !defaultValue ? new Date(0, 0, 0, 0) : defaultValue
+  if (!date) date = !defaultValue ? new Date(0, 0, 0, 0) : defaultValue
   const avaliableDates = dates.map((date) => new Date(date))
   const [defValue, setDefValue] = useState(defaultValue)
 
@@ -89,73 +93,78 @@ const SelectDate = ({
   }
 
   return (
-    <FormControl className="flex flex-row gap-2 pb-6">
-      <Select
-        id="year"
-        placeholder="Year"
-        onChange={loadMonths}
-        defaultValue={!defValue ? '' : defValue.getFullYear().toString()}
-      >
-        {yearOptions}
-      </Select>
-      <Select
-        id="month"
-        placeholder="Month"
-        onChange={loadDates}
-        defaultValue={!defValue ? '' : defValue.getMonth().toString()}
-      >
-        {monthOptions}
-        {!defValue
-          ? ''
-          : (() => {
-              const v = defValue.getMonth()
-              return (
-                <option value={v.toString()} key={v.toString()}>
-                  {`${v + 1}. ${getMonthName(v)}`}
-                </option>
-              )
-            })()}
-      </Select>
-      <Select
-        id="day"
-        placeholder="Day"
-        onChange={loadHours}
-        defaultValue={!defValue ? '' : defValue.getDate().toString()}
-      >
-        {dateOptions}
-        {!defValue
-          ? ''
-          : (() => {
-              const v = defValue.getDate()
-              return (
-                <option value={v.toString()} key={v.toString()}>
-                  {`${v}. ${(() => {
-                    const newDate = new Date(date.getTime())
-                    newDate.setDate(v)
-                    return getDayName(newDate.getDay())
-                  })()}`}
-                </option>
-              )
-            })()}
-      </Select>
-      <Select
-        id="hour"
-        placeholder="Hour"
-        defaultValue={!defValue ? '' : defValue.getHours().toString()}
-      >
-        {hourOptions}
-        {!defValue
-          ? ''
-          : (() => {
-              const v = defValue.getHours()
-              return (
-                <option value={v.toString()} key={v.toString()}>
-                  {`${v}:00`}
-                </option>
-              )
-            })()}
-      </Select>
-    </FormControl>
+    <div className="w-full">
+      <FormLabel>
+        Select Date{isRequired ? <RequiredIndicator /> : <></>}
+      </FormLabel>
+      <FormControl className="flex flex-row gap-4 pb-6">
+        <Select
+          id="year"
+          placeholder="Year"
+          onChange={loadMonths}
+          defaultValue={!defValue ? '' : defValue.getFullYear().toString()}
+        >
+          {yearOptions}
+        </Select>
+        <Select
+          id="month"
+          placeholder="Month"
+          onChange={loadDates}
+          defaultValue={!defValue ? '' : defValue.getMonth().toString()}
+        >
+          {monthOptions}
+          {!defValue
+            ? ''
+            : (() => {
+                const v = defValue.getMonth()
+                return (
+                  <option value={v.toString()} key={v.toString()}>
+                    {`${v + 1}. ${getMonthName(v)}`}
+                  </option>
+                )
+              })()}
+        </Select>
+        <Select
+          id="day"
+          placeholder="Day"
+          onChange={loadHours}
+          defaultValue={!defValue ? '' : defValue.getDate().toString()}
+        >
+          {dateOptions}
+          {!defValue
+            ? ''
+            : (() => {
+                const v = defValue.getDate()
+                return (
+                  <option value={v.toString()} key={v.toString()}>
+                    {`${v}. ${(() => {
+                      const newDate = new Date(date.getTime())
+                      newDate.setDate(v)
+                      return getDayName(newDate.getDay())
+                    })()}`}
+                  </option>
+                )
+              })()}
+        </Select>
+        <Select
+          id="hour"
+          placeholder="Hour"
+          defaultValue={!defValue ? '' : defValue.getHours().toString()}
+        >
+          {hourOptions}
+          {!defValue
+            ? ''
+            : (() => {
+                const v = defValue.getHours()
+                return (
+                  <option value={v.toString()} key={v.toString()}>
+                    {`${v}:00`}
+                  </option>
+                )
+              })()}
+        </Select>
+      </FormControl>
+    </div>
   )
 }
 export default SelectDate
