@@ -25,9 +25,11 @@ const VisitElement = ({
         <li>Tel: {phone}</li>
         <li>
           Date:{' '}
-          {`${dateInstance.getFullYear()} - ${dateInstance.getMonth()} - ${dateInstance.getDate()}. ${getDayName(
+          {`${dateInstance.getFullYear()} - ${
+            dateInstance.getMonth() + 1
+          } - ${dateInstance.getDate()} : ${dateInstance.getHours()}:00 | (${getDayName(
             dateInstance.getDay()
-          )}`}
+          )})`}
         </li>
       </ul>
       <Link href={`/admin-panel/visit/${_id}`}>
