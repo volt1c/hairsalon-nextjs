@@ -11,7 +11,7 @@ type Props = {
 }
 
 const Sidebar = ({ pageName }: Props): ReactElement => (
-  <aside className="min-h-screen flex flex-col w-48">
+  <aside className="flex flex-col w-48 h-full z-10 fixed">
     <header className="bg-blue-900 w-full p-3">
       Admin <span className="font-bold">Panel</span>
     </header>
@@ -22,7 +22,7 @@ const Sidebar = ({ pageName }: Props): ReactElement => (
           Icon={AiOutlineDashboard}
           isChosen={pageName == 'index'}
           href="/admin-panel/"
-          title="index"
+          title="dashboard"
         />
       </ul>
     </section>

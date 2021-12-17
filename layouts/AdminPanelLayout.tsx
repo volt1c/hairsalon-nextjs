@@ -20,9 +20,10 @@ const AdminPanelLayout = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Sidebar pageName={pageName} />
       <Topbar />
-      <main className="mt-12 p-1">{children}</main>
+      <Sidebar pageName={pageName} />
+
+      <main className="ml-48 mt-12 p-1 w-full">{children}</main>
     </div>
   )
 }
