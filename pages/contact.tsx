@@ -34,7 +34,7 @@ const ContactPage: NextPage = () => {
         </div>
         <div className="p-5 text-2xl">
           <h1>Send us a message</h1>
-          <form action="" className="flex flex-row flex-wrap ">
+          <form className="flex flex-row flex-wrap ">
             <FormControl className="p-2 w-1/2 flex-grow">
               <FormLabel>Name</FormLabel>
               <Input placeholder="Name" />
