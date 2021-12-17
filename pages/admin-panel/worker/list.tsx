@@ -1,3 +1,4 @@
+import AdminElement from '@components/admin-panel/AdminElement'
 import { IAdmin } from '@database/models/admin'
 import AdminPanelLayout from '@layouts/AdminPanelLayout'
 import fetchWithCookies from '@utils/fetchWithCookies'
@@ -10,20 +11,26 @@ type Props = {
   admins: IAdmin[]
 }
 
-const AddVisitPage: NextPage<Props, any> = ({ admins }) => {
+const ListWorkerPage: NextPage<Props, any> = ({ admins }) => {
   return (
     <AdminPanelLayout pageName="worker:list">
-      <h1 className="pl-4 py-2 text-2xl">List</h1>
-      <ul>
-        {admins.map((admin, idx) => {
-          return <li key={idx}>{admin.email}</li>
-        })}
-      </ul>
+      <div className="pl-4">
+        <h1 className="py-2 text-2xl">List</h1>
+        <ul>
+          {admins.map((admin, idx) => {
+            return (
+              <li key={idx}>
+                <AdminElement admin={admin} />
+              </li>
+            )
+          })}
+        </ul>
+      </div>
     </AdminPanelLayout>
   )
 }
 
-AddVisitPage.getInitialProps = async (ctx: NextPageContext) => {
+ListWorkerPage.getInitialProps = async (ctx: NextPageContext) => {
   const url = getOriginUrl(ctx.req)
   const cookie = ctx.req?.headers.cookie
   const res = await fetchWithCookies(`${url}/api/permission`, 'GET', cookie)
@@ -41,4 +48,4 @@ AddVisitPage.getInitialProps = async (ctx: NextPageContext) => {
   return { admins }
 }
 
-export default AddVisitPage
+export default ListWorkerPage
