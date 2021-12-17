@@ -36,6 +36,7 @@ async function getAvaliableDates(
   const endDate: Date = getEndDate(hours, scope)
 
   let currentDate = startDate
+  currentDate = getNextDate(currentDate, hours)
   while (currentDate <= endDate) {
     if (!unavalible.includes(currentDate.valueOf())) {
       dates.push(currentDate)

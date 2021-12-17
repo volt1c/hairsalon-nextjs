@@ -16,9 +16,15 @@ export default async function handler(
   switch (method) {
     case 'GET':
       const rawVisits: IVisit[] = await Visit.find({}).exec()
-      const unavaliable: Date[] = rawVisits.map((visit) => visit.date)
+      const unavaliable: Date[] = rawVisits.map((visit) => new Date(visit.date))
       const avaliable: Date[] = await getAvaliableDates(
-        new Date(Date.now()),
+        (() => {
+          const date = new Date(Date.now())
+          date.setMinutes(0)
+          date.setSeconds(0)
+          date.setMilliseconds(0)
+          return date
+        })(),
         unavaliable.map((date) => date.valueOf())
       )
       res.status(200).json({ avaliable: avaliable })

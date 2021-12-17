@@ -41,7 +41,7 @@ interface IVisit extends Document {
   surename: string
   email: string
   phone: string
-  date: Date
+  date: Date | string
 }
 interface ICreateVisit {
   name: IVisit['name']
