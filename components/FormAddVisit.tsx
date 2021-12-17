@@ -1,13 +1,27 @@
-import { Button, FormControl, Input, Link } from '@vechaiui/react'
-import { ReactElement } from 'react'
+import {
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  Link,
+  RequiredIndicator,
+} from '@vechaiui/react'
+import Router from 'next/router'
+import { ReactElement, useState } from 'react'
 import SelectDate from './SelectDate'
 
 type Props = {
   avaliable: string[]
   notification: any
+  redirectUrl: string
 }
 
-const FormAddVisit = ({ avaliable, notification }: Props): ReactElement => {
+const FormAddVisit = ({
+  avaliable,
+  notification,
+  redirectUrl = './',
+}: Props): ReactElement => {
+  const [wasSend, setWasSend] = useState(false)
   const handleMessage = (ok: boolean) =>
     notification({
       title: ok ? 'Success...' : 'Error...',
@@ -44,6 +58,7 @@ const FormAddVisit = ({ avaliable, notification }: Props): ReactElement => {
         ))
     )
 
+    setWasSend(true)
     const res = await fetch('/api/visits', {
       method: 'POST',
       body: JSON.stringify(formData),
@@ -52,29 +67,55 @@ const FormAddVisit = ({ avaliable, notification }: Props): ReactElement => {
       },
     })
     handleMessage(res.ok)
+    if (res.ok) {
+      setTimeout(() => Router.push(redirectUrl), 3000)
+    } else {
+      setWasSend(false)
+    }
   }
 
   return (
-    <form className="block p-4">
-      <FormControl id="name" className="pb-6">
-        <Input placeholder="Name" variant="solid" />
+    <form className="p-4 flex flex-row flex-wrap">
+      <FormControl id="name" className="p-2 w-1/2 flex-grow">
+        <FormLabel>
+          Name
+          <RequiredIndicator />
+        </FormLabel>
+        <Input placeholder="Name" />
       </FormControl>
-      <FormControl id="surename" className="pb-6">
-        <Input placeholder="Surename" variant="solid" />
+      <FormControl id="surename" className="p-2 w-1/2 flex-grow">
+        <FormLabel>
+          Surename
+          <RequiredIndicator />
+        </FormLabel>
+        <Input placeholder="Surename" />
       </FormControl>
-      <FormControl id="email" className="pb-6">
-        <Input placeholder="Email" variant="solid" />
+      <FormControl id="email" className="p-2 w-1/2 flex-grow">
+        <FormLabel>
+          Email
+          <RequiredIndicator />
+        </FormLabel>
+        <Input placeholder="Email" type="email" />
       </FormControl>
-      <FormControl id="phone" className="pb-6">
+      <FormControl id="phone" className="p-2 w-1/2 flex-grow">
+        <FormLabel>
+          Phone number
+          <RequiredIndicator />
+        </FormLabel>
         <Input.Group>
           <Input.LeftAddon children="+xxx" />
-          <Input placeholder="Phone Number" variant="solid" />
+          <Input placeholder="Phone number" />
         </Input.Group>
       </FormControl>
-      <div className="flex flex-row">
-        <SelectDate dates={avaliable} />
+      <div className="flex flex-row w-full p-2 flex-grow">
+        <SelectDate dates={avaliable} isRequired={true} />
       </div>
-      <Button type="button" className="mr-3" onClick={formSubmit}>
+      <Button
+        type="button"
+        className="ml-2 mr-3"
+        onClick={formSubmit}
+        disabled={wasSend}
+      >
         Send
       </Button>
       <Link href="/contact">
