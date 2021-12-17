@@ -41,7 +41,11 @@ export default async function handler(
         typeof body.year == 'number' &&
         typeof body.month == 'number' &&
         typeof body.day == 'number' &&
-        typeof body.hour == 'number'
+        typeof body.hour == 'number' &&
+        !!body.name &&
+        !!body.surename &&
+        !!body.email &&
+        !!body.phone
       ) {
         const visit = body as ICreateVisit
         code = (await addVisit(visit)) ? 201 : 422
