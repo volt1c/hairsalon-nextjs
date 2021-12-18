@@ -19,7 +19,7 @@ const IndexPage: NextPage = () => (
 IndexPage.getInitialProps = async (ctx: NextPageContext) => {
   const url = getOriginUrl(ctx.req)
   const cookie = ctx.req?.headers.cookie
-  const res = await fetchWithCookies(`${url}/api/visits`, 'GET', cookie)
+  const res = await fetchWithCookies(`${url}/api/permission/`, 'HEAD', cookie)
 
   if (res.status === 401 && !ctx.req) Router.push(`${url}/api/auth/signin`)
   if (res.status === 401 && ctx.req) {
@@ -28,7 +28,6 @@ IndexPage.getInitialProps = async (ctx: NextPageContext) => {
     })
     ctx.res?.end()
   }
-
   return {}
 }
 
