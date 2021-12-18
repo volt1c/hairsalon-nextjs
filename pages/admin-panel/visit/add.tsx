@@ -16,8 +16,14 @@ const AddVisitPage: NextPage<Props, any> = ({ avaliable }: Props) => {
 
   return (
     <AdminPanelLayout pageName="visit:add">
-      <h1 className="pl-4 py-2 text-2xl">Add</h1>
-      <FormAddVisit avaliable={avaliable} notification={notification} />
+      <div className="max-w-screen-md">
+        <h1 className="px-4 py-2 text-2xl">Add</h1>
+        <FormAddVisit
+          avaliable={avaliable}
+          notification={notification}
+          redirectUrl="/admin-panel/visit/list"
+        />
+      </div>
     </AdminPanelLayout>
   )
 }

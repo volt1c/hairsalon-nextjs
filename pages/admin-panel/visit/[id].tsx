@@ -69,8 +69,8 @@ const AddVisitPage: NextPage<Props, any> = ({ visit, avaliable }: Props) => {
 
   return (
     <AdminPanelLayout pageName="">
-      <h1 className="pl-4 py-2 text-2xl">Visit</h1>
-      <form className="pl-4">
+      <h1 className="px-4 py-2 text-2xl">Visit</h1>
+      <form className="px-4 max-w-md">
         <FormControl id="name" className="pb-6">
           <Input placeholder="Name" variant="solid" defaultValue={visit.name} />
         </FormControl>

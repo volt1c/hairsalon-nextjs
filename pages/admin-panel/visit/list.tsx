@@ -14,7 +14,7 @@ type Props = {
 const AddVisitPage: NextPage<Props, any> = ({ visits }) => {
   return (
     <AdminPanelLayout pageName="visit:list">
-      <h1 className="pl-4 py-2 text-2xl">List</h1>
+      <h1 className="px-4 py-2 text-2xl">List</h1>
       <ul>
         {visits.map((visit, idx) => {
           return (

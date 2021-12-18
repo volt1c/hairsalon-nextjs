@@ -13,15 +13,15 @@ const AddVisitPage: NextPage<Props, any> = ({}: Props) => {
   const handleMessage = (ok: boolean) =>
     notification({
       title: ok ? 'Success...' : 'Error...',
-      description: `Apppointment ${
-        ok ? ' was successfully updated' : "couldn't be updated"
-      }`,
+      description: `Admin ${ok ? 'was added' : "couldn't be added"}`,
       status: ok ? 'success' : 'error',
       position: 'top',
     })
   const formSubmit = async () => {
     const getValue = (id: string): string | number => {
-      const value = (document.querySelector(`#${id}`) as any).value as string
+      const el = document.querySelector(`#${id}`)
+      const value = (el as any).value as string
+      ;(el as any).value = ''
       return value
     }
 
@@ -42,15 +42,15 @@ const AddVisitPage: NextPage<Props, any> = ({}: Props) => {
 
   return (
     <AdminPanelLayout pageName="worker:add">
-      <h1 className="pl-4 py-2 text-2xl">Add</h1>
-      <form>
+      <div className="px-4 max-w-screen-md">
+        <h1 className="py-2 text-2xl">Add</h1>
         <FormControl id="email" className="pb-6">
           <Input placeholder="Email" variant="solid" />
         </FormControl>
         <Button type="button" className="mr-3" onClick={formSubmit}>
           Send
         </Button>
-      </form>
+      </div>
     </AdminPanelLayout>
   )
 }
