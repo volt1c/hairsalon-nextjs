@@ -1,12 +1,11 @@
-import FormAddVisit, { fetchAvaliable } from '@components/FormAddVisit'
-import SelectDate from '@components/SelectDate'
+import { fetchAvaliable } from '@components/FormAddVisit'
 import { IVisit } from '@database/models/visit'
 import AdminPanelLayout from '@layouts/AdminPanelLayout'
 import fetchWithCookies from '@utils/fetchWithCookies'
 import getOriginUrl from '@utils/getOriginUrl'
 import { Button, FormControl, Input, useNotification } from '@vechaiui/react'
 import { NextPage, NextPageContext } from 'next'
-import Router, { useRouter } from 'next/router'
+import Router from 'next/router'
 import React from 'react'
 
 type Props = {
