@@ -2,6 +2,7 @@ import { FormControl, RequiredIndicator, Select } from '@vechaiui/forms'
 import React, { ReactElement, useState } from 'react'
 import { getDayName, getMonthName } from '@utils/dateNames'
 import { FormLabel } from '@vechaiui/react'
+import { getOptions } from './SelectDate/getOptions'
 
 type Props = {
   dates: string[]
@@ -21,37 +22,23 @@ const SelectDate = ({
   const avaliableDates = dates.map((date) => new Date(date))
   const [defValue, setDefValue] = useState(defaultValue)
 
-  const getOptions = (
-    filterCallback: (value: Date) => boolean,
-    mapCallback: (value: Date) => number,
-    formatCallback: (value: number) => string
-  ) =>
-    avaliableDates
-      .filter((d) => filterCallback(d))
-      .map((d) => mapCallback(d))
-      .filter((el, idx, arr) => arr.indexOf(el) === idx)
-      .map((opt) => (
-        <option value={opt.toString()} key={opt.toString()}>
-          {formatCallback(opt)}
-        </option>
-      ))
-
   const getYearOptions = () =>
     getOptions(
+      avaliableDates,
       (d) => true,
       (d) => d.getFullYear(),
       (n) => n.toString()
     )
-
   const getMonthOptions = () =>
     getOptions(
+      avaliableDates,
       (d) => d.getFullYear() == date.getFullYear(),
       (d) => d.getMonth(),
       (n) => `${n + 1}. ${getMonthName(n)}`
     )
-
   const getDateOptions = () =>
     getOptions(
+      avaliableDates,
       (d) =>
         d.getFullYear() == date.getFullYear() &&
         d.getMonth() == date.getMonth(),
@@ -65,6 +52,7 @@ const SelectDate = ({
     )
   const getHourOptions = () =>
     getOptions(
+      avaliableDates,
       (d) =>
         d.getFullYear() == date.getFullYear() &&
         d.getMonth() == date.getMonth() &&
