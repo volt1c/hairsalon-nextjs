@@ -18,8 +18,8 @@ mongoose
   })
   .catch((err) => {
     if (err) console.error('> MongoDB connection is dead 💀...')
-    else console.log('> MongoDB connected!')
   })
+  .then(console.log('> MongoDB connected!'))
 
 app.prepare().then(() => {
   createServer((req, res) => {
