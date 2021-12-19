@@ -25,9 +25,9 @@ const FormAddVisit = ({
   const handleMessage = (ok: boolean) =>
     notification({
       title: ok ? 'Success...' : 'Error...',
-      description: `Apppointment ${
-        ok ? ' was successfully booked' : "couldn't be booked"
-      }`,
+      description: ok
+        ? 'Apppointment was successfully booked'
+        : 'Apppointment couldn not be booked',
       status: ok ? 'success' : 'error',
       position: 'top',
     })
