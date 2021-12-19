@@ -26,7 +26,7 @@ const AboutPage: NextPage = () => {
 
   return (
     <MainLayout>
-      <InfoBox className="p-3">
+      <InfoBox className="p-0 border-primary-400 mx-24 my-auto">
         <Tab.Group as="div" className="flex flex-col" defaultIndex={0}>
           <Tab.List
             aria-label="tabs example"
@@ -44,7 +44,6 @@ const AboutPage: NextPage = () => {
                   'text-neutral-900 bg-transparent border-b-2 border-transparent',
                   'hover:border-neutral-300',
                   'selected:border-primary-500 selected:text-primary-600',
-                  // dark
                   'dark:text-neutral-100',
                   'dark:hover:border-neutral-600',
                   'dark:selected:border-primary-500'
