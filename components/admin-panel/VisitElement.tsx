@@ -4,33 +4,34 @@ import fetchWithCookies from '@utils/fetchWithCookies'
 import { Button, Link } from '@vechaiui/react'
 import { ReactElement, useState } from 'react'
 
-type InfoBoxProps = {
+type Props = {
   visit: IVisit
 }
 
 const VisitElement = ({
   visit: { _id, name, surename, email, phone, date },
-}: InfoBoxProps): ReactElement => {
+}: Props): ReactElement => {
   const [show, setShow] = useState(true)
-  const dateInstance = new Date(date)
+
+  const formatDate = (date: Date) =>
+    `${date.getFullYear()} - ${
+      date.getMonth() + 1
+    } - ${date.getDate()} : ${date.getHours()}:00 | (${getDayName(
+      date.getDay()
+    )})`
+
   const deleteVisit = (id: string) => {
     fetchWithCookies(`/api/visits/${id}`, 'DELETE')
     setShow(false)
   }
-  const visitElement = (
+
+  return show ? (
     <div className="border-l-4 rounded border-neutral-600 pl-4 m-3">
       <h2 className="font-bold py-1">{`${name} ${surename}`}</h2>
       <ul className="py-1">
         <li>Email: {email}</li>
         <li>Tel: {phone}</li>
-        <li>
-          Date:{' '}
-          {`${dateInstance.getFullYear()} - ${
-            dateInstance.getMonth() + 1
-          } - ${dateInstance.getDate()} : ${dateInstance.getHours()}:00 | (${getDayName(
-            dateInstance.getDay()
-          )})`}
-        </li>
+        <li>Date: {formatDate(new Date(date))}</li>
       </ul>
       <Link href={`/admin-panel/visit/${_id}`}>
         <Button variant="ghost">Edit</Button>
@@ -39,9 +40,9 @@ const VisitElement = ({
         Delete
       </Button>
     </div>
+  ) : (
+    <></>
   )
-
-  return show ? visitElement : <></>
 }
 
 export default VisitElement

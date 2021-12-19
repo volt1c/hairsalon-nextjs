@@ -9,11 +9,13 @@ type Props = {
 
 const AdminElement = ({ admin: { _id, email } }: Props): ReactElement => {
   const [show, setShow] = useState(true)
+
   const deleteVisit = (id: string) => {
     fetchWithCookies(`/api/permission/${id}`, 'DELETE')
     setShow(false)
   }
-  const adminElement = (
+
+  return show ? (
     <div className="border-l-4 rounded border-neutral-600 pl-4 m-3">
       <ul className="py-1">
         <li>Email: {email}</li>
@@ -25,9 +27,9 @@ const AdminElement = ({ admin: { _id, email } }: Props): ReactElement => {
         Delete
       </Button>
     </div>
+  ) : (
+    <></>
   )
-
-  return show ? adminElement : <></>
 }
 
 export default AdminElement
