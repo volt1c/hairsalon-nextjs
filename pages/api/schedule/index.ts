@@ -1,11 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { ISchedule, Schedule, ScheduleKeys } from '@database/models/schedule'
-import dbConnect from '@database/dbConnect'
 import _ from 'lodash'
 import hasPermission from '@utils/hasPermission'
 import { getSession } from 'next-auth/react'
 
-dbConnect()
 type Data = any
 
 export default async function handler(

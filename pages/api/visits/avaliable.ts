@@ -1,10 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import getAvaliableDates from '@utils/getAvaliableDates'
 import { IVisit, Visit } from '@database/models/visit'
-import dbConnect from '@database/dbConnect'
 import _ from 'lodash'
 
-dbConnect()
 type Data = any
 
 export default async function handler(

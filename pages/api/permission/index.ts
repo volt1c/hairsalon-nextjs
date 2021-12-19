@@ -1,11 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import dbConnect from '@database/dbConnect'
 import _ from 'lodash'
 import { Admin } from '@database/models/admin'
 import { getSession } from 'next-auth/react'
 import hasPermission from '@utils/hasPermission'
 
-dbConnect()
 type Data = any
 
 export default async function handler(

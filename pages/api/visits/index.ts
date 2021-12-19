@@ -1,12 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { ICreateVisit, IVisit, Visit, VisitKeys } from '@database/models/visit'
-import dbConnect from '@database/dbConnect'
 import _ from 'lodash'
 import { addVisit } from './addVisit'
 import { getSession } from 'next-auth/react'
 import hasPermission from '@utils/hasPermission'
 
-dbConnect()
 type Data = any
 
 export default async function handler(
