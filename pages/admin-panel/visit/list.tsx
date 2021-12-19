@@ -16,13 +16,17 @@ const AddVisitPage: NextPage<Props, any> = ({ visits }) => {
     <AdminPanelLayout pageName="visit:list">
       <h1 className="px-4 py-2 text-2xl">List</h1>
       <ul>
-        {visits.map((visit, idx) => {
-          return (
-            <li key={idx}>
-              <VisitElement visit={visit} />
-            </li>
+        {visits
+          .sort(
+            (a, b) => new Date(a.date).valueOf() - new Date(b.date).valueOf()
           )
-        })}
+          .map((visit, idx) => {
+            return (
+              <li key={idx}>
+                <VisitElement visit={visit} />
+              </li>
+            )
+          })}
       </ul>
     </AdminPanelLayout>
   )
