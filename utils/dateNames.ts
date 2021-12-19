@@ -1,6 +1,7 @@
-//todo add types
-const getMonthName = (idx: number) =>
-  [
+const getMonthName = (idx: number): string => {
+  if (idx < 0 || idx > 11) return 'undefined'
+
+  return [
     'January',
     'February',
     'March',
@@ -14,8 +15,11 @@ const getMonthName = (idx: number) =>
     'November',
     'December',
   ][idx]
-const getDayName = (idx: number) =>
-  [
+}
+const getDayName = (idx: number): string => {
+  if (idx < 0 || idx > 6) return 'undefined'
+
+  return [
     'Sunday',
     'Monday',
     'Tuesday',
@@ -24,5 +28,6 @@ const getDayName = (idx: number) =>
     'Friday',
     'Saturday',
   ][idx]
+}
 
 export { getDayName, getMonthName }
